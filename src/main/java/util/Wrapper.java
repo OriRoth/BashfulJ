@@ -8,7 +8,6 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
-import javax.tools.StandardLocation;
 
 public class Wrapper {
 	private final Filer filer;
@@ -39,12 +38,7 @@ public class Wrapper {
 		messager.printMessage(Kind.ERROR, x.getMessage(), e);
 	}
 
-	// TODO: check whether works
-	public boolean outputExists(String pkg, String clazz) throws IOException {
-		return filer.getResource(StandardLocation.SOURCE_OUTPUT, pkg, clazz + ".java") != null;
-	}
-
-	public FileObject createSource(CharSequence pkg, String clazz, Element... originatingElements) throws IOException {
-		return filer.createResource(StandardLocation.SOURCE_OUTPUT, pkg, clazz + ".java", originatingElements);
+	public FileObject createSource(String name, Element... originatingElements) throws IOException {
+		return filer.createSourceFile(name, originatingElements);
 	}
 }

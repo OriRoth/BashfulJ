@@ -63,11 +63,6 @@ public class BashfulProcessor extends AbstractProcessor {
 		Runtime rt = Runtime.getRuntime();
 		Process p = rt.exec(b.value());
 		p.waitFor();
-		int ev = p.exitValue();
-		if (ev != 0) {
-			wrapper.error(e, "Process exited with value " + ev);
-			return;
-		}
 		String input = read(p.getInputStream());
 		String error = read(p.getErrorStream());
 		StringBuilder clazz = new StringBuilder();
@@ -76,7 +71,7 @@ public class BashfulProcessor extends AbstractProcessor {
 				.append("\tpublic static final String output = \"" + input + "\";\n") //
 				.append("\tpublic static final String error = \"" + error + "\";\n") //
 				.append("}\n");
-		FileObject f = wrapper.createSource(PACKAGE, n, e);
+		FileObject f = wrapper.createSource(PACKAGE + "." + n, e);
 		Writer w = f.openWriter();
 		w.write(clazz.toString());
 		w.close();
