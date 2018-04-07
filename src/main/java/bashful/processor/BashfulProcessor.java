@@ -61,7 +61,7 @@ public class BashfulProcessor extends AbstractProcessor {
 			return;
 		outputNames.add(n);
 		Runtime rt = Runtime.getRuntime();
-		Process p = rt.exec(b.value());
+		Process p = rt.exec(new String[] { "/bin/bash", "-c", b.value() });
 		p.waitFor();
 		String input = read(p.getInputStream());
 		String error = read(p.getErrorStream());
