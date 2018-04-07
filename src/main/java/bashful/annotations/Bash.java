@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Bash {
-	public String value() default ":";
-	public String name() default "Bash";
+	public String[] value() default ":";
+	public String name() default "Bashing";
 }
