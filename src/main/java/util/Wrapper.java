@@ -41,7 +41,7 @@ public class Wrapper {
 
 	// TODO: check whether works
 	public boolean outputExists(String pkg, String clazz) throws IOException {
-		return filer.getResource(StandardLocation.SOURCE_OUTPUT, pkg, clazz + ".java") == null;
+		return filer.getResource(StandardLocation.SOURCE_OUTPUT, pkg, clazz + ".java") != null;
 	}
 
 	public FileObject createSource(CharSequence pkg, String clazz, Element... originatingElements) throws IOException {
